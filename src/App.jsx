@@ -47,16 +47,16 @@ export default function PortfolioTemplate() {
       },
       whoami: {
         title: "identity",
-        lines: [
-          "Jeteish Pratap Singh",
-          "Software Engineering Graduate Student",
-          "Tempe, Arizona",
-          "",
-          "Backend and cloud-native systems focused engineer building distributed services,",
-          "microservice platforms, and reliability-oriented backend infrastructure.",
-          "",
-          "status: seeking software engineering opportunities",
-        ],
+        table: {
+          headers: ["Attribute", "Value"],
+          rows: [
+            ["Name", "Jeteish Pratap Singh"],
+            ["Role", "Software Engineering Graduate Student"],
+            ["Location", "Tempe, Arizona"],
+            ["Focus", "Backend, Cloud-native, Distributed Systems"],
+            ["Status", "Seeking Software Engineering Opportunities"],
+          ],
+        },
       },
       about: {
         title: "about module",
@@ -70,76 +70,72 @@ export default function PortfolioTemplate() {
       },
       skills: {
         title: "skills inventory",
-        lines: [
-          "languages: C++, C, C#, Java, Python, JavaScript",
-          "backend: REST APIs, microservices, multithreading, Linux, memory management",
-          "cloud: Docker, Kubernetes, CI/CD, cloud-native services",
-          "ml: TensorFlow, PyTorch, Scikit-learn",
-          "focus: distributed systems, backend reliability, event-driven pipelines",
-        ],
+        table: {
+          headers: ["Name", "Category", "Details"],
+          rows: [
+            ["languages.conf", "Languages", "C++, Java, Python, JavaScript"],
+            ["backend.svc", "Backend", "REST, Microservices, multithreading, Linux"],
+            ["cloud-native.yaml", "Cloud", "Docker, Kubernetes, CI/CD, GitHub Actions"],
+            ["ml-models.lib", "ML", "TensorFlow, PyTorch, Scikit-learn"],
+            ["tools.env", "Tools", "Git, Microservices, Containerized Workflows"],
+          ],
+        },
       },
       projects: {
         title: "project index",
-        lines: [
-          "[01] Distributed Face Recognition Pipeline (AWS Edge & Cloud)",
-          "     stack: AWS, edge systems, containerized microservices, cloud services",
-          "     impact: built a distributed cloud-native pipeline for real-time inference workloads",
-          "",
-          "[02] Software Quality Metrics Platform",
-          "     stack: Flask, REST APIs, GitHub Actions, microservices",
-          "     impact: reduced build and test feedback time by 50% and improved team onboarding",
-          "",
-          "[03] Virtual Machine",
-          "     stack: low-level systems, instruction decoding, memory access, I/O operations",
-          "     impact: improved runtime correctness, stability, and fault handling",
-        ],
+        table: {
+          headers: ["Name", "Date", "Stack", "Impact"],
+          rows: [
+            ["distributed-face-recognition", "Sept 2025-Dec 2025", "AWS, Edge, Cloud-native", "Designed distributed cloud-native pipeline"],
+            ["software-quality-metrics", "Jan 2025-Apr 2025", "Flask, APIs, GitHub Actions", "Built SaaS backend; reduced feedback 50%"],
+            ["virtual-machine", "Oct 2024-Nov 2024", "C++, Systems, I/O", "Built custom VM with instruction decoding"],
+          ],
+        },
       },
       experience: {
         title: "career log",
-        lines: [
-          "[internship] Software Developer Intern @ Indovators Technologies Pvt. Ltd.",
-          "- designed and customized application modules aligned to client requirements",
-          "- created and executed 200+ automated test cases for feature compliance and software quality",
-          "- collaborated cross-functionally to debug backend issues and improve stability and delivery",
-          "",
-          "[publication] Contributing Author",
-          "- Analyzing Accessible Learning Using Summarization for Communities",
-          "- studied summarization techniques for accessible digital learning environments",
-        ],
+        table: {
+          headers: ["Name", "Date", "Role", "Impact"],
+          rows: [
+            ["indovators-internship", "Apr 2023-May 2023", "Software Developer Intern", "Created 200+ test cases; improved stability"],
+            ["accessibility-publication", "2025", "Contributing Author", "Studied text summarization for learning"],
+          ],
+        },
       },
       education: {
         title: "education log",
-        lines: [
-          "M.S. in Software Engineering",
-          "Arizona State University",
-          "Expected: May 2026",
-          "",
-          "B.Tech. in Computer Science Engineering",
-          "Amity University",
-          "Graduated: June 2024",
-        ],
+        table: {
+          headers: ["Name", "Date", "Degree", "Location"],
+          rows: [
+            ["arizona-state-university", "Expected May 2026", "M.S. Software Engineering", "Tempe, AZ"],
+            ["amity-university", "June 2024", "B.Tech. Computer Science", "Noida, IN"],
+          ],
+        },
       },
       stats: {
         title: "developer telemetry",
-        lines: [
-          "education_target=May 2026",
-          "test_cases_written=200+",
-          "build_feedback_improvement=50%",
-          "architecture_walkthroughs=10+ teammates",
-          "core_focus=backend + cloud-native systems + distributed services",
-        ],
+        table: {
+          headers: ["Metric", "Value"],
+          rows: [
+            ["Education Target", "May 2026"],
+            ["Automated Test Cases", "200+ Written"],
+            ["Architecture Mentorship", "10+ Teammates"],
+            ["Primary Stack", "Backend / Cloud-native / Reliability"],
+          ],
+        },
       },
       contact: {
         title: "contact payload",
-        lines: [
-          "{",
-          '  "phone": "602-736-5357",',
-          '  "email": "jeteish.pratap@gmail.com",',
-          '  "linkedin": "https://www.linkedin.com/in/jeteish-pratap-singh",',
-          '  "resume": "/resume.pdf",',
-          '  "availability": "Open to software engineering opportunities"',
-          "}",
-        ],
+        table: {
+          headers: ["Channel", "Endpoint"],
+          rows: [
+            ["Phone", "602-736-5357"],
+            ["Email", "jeteish.pratap@gmail.com"],
+            ["LinkedIn", "linkedin.com/in/jeteish-pratap-singh"],
+            ["GitHub", "github.com/jeteish-pratap-singh"],
+            ["Availability", "Open to SWE Opportunities"],
+          ],
+        },
       },
       resume: {
         title: "resume path",
@@ -290,7 +286,7 @@ export default function PortfolioTemplate() {
         return prev.concat(`$ ${command}`).slice(-18);
       });
       setCurrentTitle(commandMap[command].title);
-      setCurrentOutput(commandMap[command].lines);
+      setCurrentOutput(commandMap[command].table || commandMap[command].lines);
       setSuggestedCommand(command);
       setInput("");
       return;
@@ -313,39 +309,39 @@ export default function PortfolioTemplate() {
 
   const themeClasses = isDark
     ? {
-        shell: "bg-zinc-950 text-zinc-100",
-        pageGlowA: "bg-emerald-500/10",
-        pageGlowB: "bg-cyan-500/10",
-        nav: "border-zinc-800 bg-zinc-950/85",
-        terminalFrame: "border-zinc-800 bg-zinc-900/95 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_30px_120px_rgba(0,0,0,0.55)]",
-        terminalPanel: "border-zinc-800 bg-zinc-950/80",
-        sidebar: "border-zinc-800 bg-zinc-900/80",
-        textPrimary: "text-zinc-100",
-        textSoft: "text-zinc-300",
-        textMuted: "text-zinc-500",
-        accent: "text-emerald-400",
-        accentBg: "bg-emerald-400/10",
-        accentBorder: "border-emerald-400/20",
-        button: "border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-zinc-100",
-        selectionLine: "text-zinc-300",
-      }
+      shell: "bg-zinc-950 text-zinc-100",
+      pageGlowA: "bg-emerald-500/10",
+      pageGlowB: "bg-cyan-500/10",
+      nav: "border-zinc-800 bg-zinc-950/85",
+      terminalFrame: "border-zinc-800 bg-zinc-900/95 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_30px_120px_rgba(0,0,0,0.55)]",
+      terminalPanel: "border-zinc-800 bg-zinc-950/80",
+      sidebar: "border-zinc-800 bg-zinc-900/80",
+      textPrimary: "text-zinc-100",
+      textSoft: "text-zinc-300",
+      textMuted: "text-zinc-500",
+      accent: "text-emerald-400",
+      accentBg: "bg-emerald-400/10",
+      accentBorder: "border-emerald-400/20",
+      button: "border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-zinc-100",
+      selectionLine: "text-zinc-300",
+    }
     : {
-        shell: "bg-stone-100 text-zinc-950",
-        pageGlowA: "bg-emerald-400/10",
-        pageGlowB: "bg-cyan-400/10",
-        nav: "border-zinc-200 bg-white/85",
-        terminalFrame: "border-zinc-200 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.04),0_30px_120px_rgba(0,0,0,0.14)]",
-        terminalPanel: "border-zinc-200 bg-zinc-50",
-        sidebar: "border-zinc-200 bg-white/85",
-        textPrimary: "text-zinc-950",
-        textSoft: "text-zinc-700",
-        textMuted: "text-zinc-500",
-        accent: "text-emerald-700",
-        accentBg: "bg-emerald-50",
-        accentBorder: "border-emerald-200",
-        button: "border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-950",
-        selectionLine: "text-zinc-700",
-      };
+      shell: "bg-stone-100 text-zinc-950",
+      pageGlowA: "bg-emerald-400/10",
+      pageGlowB: "bg-cyan-400/10",
+      nav: "border-zinc-200 bg-white/85",
+      terminalFrame: "border-zinc-200 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.04),0_30px_120px_rgba(0,0,0,0.14)]",
+      terminalPanel: "border-zinc-200 bg-zinc-50",
+      sidebar: "border-zinc-200 bg-white/85",
+      textPrimary: "text-zinc-950",
+      textSoft: "text-zinc-700",
+      textMuted: "text-zinc-500",
+      accent: "text-emerald-700",
+      accentBg: "bg-emerald-50",
+      accentBorder: "border-emerald-200",
+      button: "border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-950",
+      selectionLine: "text-zinc-700",
+    };
 
   return (
     <div className={"min-h-screen overflow-hidden transition-colors duration-300 " + themeClasses.shell}>
@@ -484,7 +480,7 @@ export default function PortfolioTemplate() {
                     external
                   </p>
                   <div className="mt-4 space-y-3 text-sm">
-                    <a href="mailto:jeteish.pratap@gmail.com" target="_blank" rel="noopener noreferrer"className="inline-flex items-center gap-2 text-emerald-400 hover:opacity-80">
+                    <a href="mailto:jeteish.pratap@gmail.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-emerald-400 hover:opacity-80">
                       <Mail className="h-4 w-4" /> Email <ExternalLink className="h-4 w-4" />
                     </a>
                     <a href="https://github.com/jeteish-pratap-singh" className="inline-flex items-center gap-2 text-emerald-400 hover:opacity-80">
@@ -540,19 +536,48 @@ export default function PortfolioTemplate() {
                               <span className="text-emerald-400">&gt;</span> output
                             </div>
 
-                            <div className={"space-y-1 whitespace-pre-wrap break-words " + themeClasses.textSoft}>
-                              {currentOutput.map(function renderOutputLine(line, index) {
-                                return (
-                                  <motion.div
-                                    key={currentTitle + "-" + index + "-" + line}
-                                    initial={{ opacity: 0, x: -6 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.02 }}
-                                  >
-                                    {line || " "}
-                                  </motion.div>
-                                );
-                              })}
+                            <div className={themeClasses.textSoft}>
+                              {!Array.isArray(currentOutput) && currentOutput.headers ? (
+                                <div className="mt-4 overflow-x-auto rounded-xl border border-zinc-700/50 bg-zinc-900/30 p-2">
+                                  <table className="w-full border-collapse font-mono text-xs text-left">
+                                    <thead>
+                                      <tr className="border-b border-dashed border-zinc-700/50">
+                                        {currentOutput.headers.map((h) => (
+                                          <th key={h} className="px-3 py-2 font-bold text-emerald-400 uppercase tracking-wider whitespace-nowrap">
+                                            {h}
+                                          </th>
+                                        ))}
+                                      </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-dashed divide-zinc-700/30">
+                                      {currentOutput.rows.map((row, idx) => (
+                                        <tr key={idx} className="hover:bg-emerald-400/5 transition-colors">
+                                          {row.map((cell, i) => (
+                                            <td key={i} className="px-3 py-2 align-top">
+                                              {cell}
+                                            </td>
+                                          ))}
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              ) : (
+                                <div className="space-y-1 whitespace-pre-wrap break-words">
+                                  {currentOutput.map(function renderOutputLine(line, index) {
+                                    return (
+                                      <motion.div
+                                        key={currentTitle + "-" + index + "-" + line}
+                                        initial={{ opacity: 0, x: -6 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.02 }}
+                                      >
+                                        {line || " "}
+                                      </motion.div>
+                                    );
+                                  })}
+                                </div>
+                              )}
                             </div>
                           </motion.div>
                         </AnimatePresence>
